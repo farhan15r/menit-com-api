@@ -1,7 +1,7 @@
 import db from "./config/db.js";
 import express from "express";
 import cors from "cors";
-import router from "./router.js";
+import router from "./routers/router.js";
 
 const app = express();
 app.use(
@@ -30,9 +30,9 @@ const database = async () => {
 
 const serve = async () => {
   try {
-    app.listen("3000");
+    app.listen("5000");
     app.use(router);
-    console.log("server running on localhost port 3000...");
+    console.log("server running on localhost port 5000...");
   } catch (e) {
     console.error("server runing error: ", e);
   }

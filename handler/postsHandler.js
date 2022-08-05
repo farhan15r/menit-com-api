@@ -1,7 +1,7 @@
 import { Op } from "sequelize";
 import model from "../models/index.js";
 
-const homeHandler = async (req, res) => {
+const getAllPosts = async (req, res) => {
   console.log(Date(), ": request GET:/");
 
   const posts = await model.Post.findAll({
@@ -20,7 +20,7 @@ const homeHandler = async (req, res) => {
   res.json(filteredPosts);
 };
 
-const postShowHandler = async (req, res) => {
+const getPostBySlug = async (req, res) => {
   console.log(Date(), `: request GET:${req.url}`);
 
   const post = await model.Post.findOne({
@@ -42,7 +42,7 @@ const postShowHandler = async (req, res) => {
   }
 };
 
-const searchHandler = async (req, res) => {
+const searchPosts = async (req, res) => {
   console.log(Date(), `: request GET:${req.url}`);
   const searchQuery = req.query.search_query;
 
@@ -53,9 +53,10 @@ const searchHandler = async (req, res) => {
         { body: { [Op.like]: `%${searchQuery}%` } },
       ],
     },
+    order: [["id", "DESC"]],
   });
 
   res.json(posts);
 };
 
-export { homeHandler, postShowHandler, searchHandler };
+export { getAllPosts, getPostBySlug, searchPosts };
