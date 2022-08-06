@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import model from "../models/index.js";
 
 const getAllPosts = async (req, res) => {
-  console.log(Date(), ": request GET:/");
+  console.log(Date(), `: request GET:${req.url}`);
 
   const posts = await model.Post.findAll({
     order: [["id", "DESC"]],
