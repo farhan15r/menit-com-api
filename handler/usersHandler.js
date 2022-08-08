@@ -47,7 +47,7 @@ const registerUser = async (req, res) => {
   const unvalid = await validate(password, confPassword, email, username);
 
   if (unvalid) {
-    return res.status(400).json({ msg: unvalid });
+    return res.status(400).json({ status: "error", msg: unvalid });
   }
 
   // hashing password
@@ -62,7 +62,7 @@ const registerUser = async (req, res) => {
       email: email,
       password: hashPassword,
     });
-    return res.json({ msg: "register successfully" });
+    return res.json({ status: "success", msg: "register successfully" });
   } catch (e) {
     console.error("can insert data to database, error: ", e);
   }
